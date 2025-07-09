@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOGO Offer</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .main-container {
+      max-width: 400px;
+      margin: auto;
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+
+    h1 {
+      color: #ea4d7e;
+      text-align: center;
+    }
+
+    .box {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease, border-color 0.3s ease;
+    }
+
+    .box:hover {
+      background-color: #f9f1f5;
+      border-color: #ccc;
+    }
+
+    .box.expanded {
+      background-color: #fff4f8;
+      border: 2px solid #ea4d7e !important;
+    }
+
+    .badge {
+      background-color: #ea4d7e;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 8px;
+    }
+
+    .tag {
+      background-color: #fce5ea;
+      color: #ea4d7e;
+      font-size: 12px;
+      padding: 2px 6px;
+      margin-left: 5px;
+      border-radius: 4px;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #aaa;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    .dropdowns {
+      display: none;
+    }
+
+    .dropdowns .row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .dropdowns label {
+      font-size: 12px;
+    }
+
+    select {
+      margin-left: 5px;
+    }
+
+    .delivery {
+      color: #ea4d7e;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+
+    .total {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .cart-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ea4d7e;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 10px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <h1>YAY! It's BOGO</h1>
+
+    <div class="box" id="box1" data-value="1">
+      <label><input type="radio" name="unit" value="1" /> 1 Unit <span class="tag">10% Off</span></label>
+      <p>$10.00 USD <span class="old-price">$24.00 USD</span></p>
+      <div class="dropdowns">
+        <div class="row">
+          <label>#1 Size</label>
+          <select><option>S</option><option>M</option><option>L</option></select>
+          <label>Color</label>
+          <select><option>Black</option><option>Red</option><option>Blue</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" id="box2" data-value="2">
+      <label><input type="radio" name="unit" value="2" checked /> 2 Unit <span class="tag">20% Off</span> <span class="badge">MOST POPULAR</span></label>
+      <p>$18.00 USD <span class="old-price">$24.00 USD</span></p>
+      <div class="dropdowns">
+        <div class="row">
+          <label>#1 Size</label>
+          <select><option>S</option><option>M</option><option>L</option></select>
+          <label>Color</label>
+          <select><option>Black</option><option>Red</option><option>Blue</option></select>
+        </div>
+        <div class="row">
+          <label>#2 Size</label>
+          <select><option>S</option><option>M</option><option>L</option></select>
+          <label>Color</label>
+          <select><option>Black</option><option>Red</option><option>Blue</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" id="box3" data-value="3">
+      <label><input type="radio" name="unit" value="3" /> 3 Unit <span class="tag">30% Off</span></label>
+      <p>$24.00 USD <span class="old-price">$24.00 USD</span></p>
+      <div class="dropdowns">
+        <div class="row">
+          <label>#1 Size</label>
+          <select><option>S</option><option>M</option><option>L</option></select>
+          <label>Color</label>
+          <select><option>Black</option><option>Red</option><option>Blue</option></select>
+        </div>
+        <div class="row">
+          <label>#2 Size</label>
+          <select><option>S</option><option>M</option><option>L</option></select>
+          <label>Color</label>
+          <select><option>Black</option><option>Red</option><option>Blue</option></select>
+        </div>
+        <div class="row">
+          <label>#3 Size</label>
+          <select><option>S</option><option>M</option><option>L</option></select>
+          <label>Color</label>
+          <select><option>Black</option><option>Red</option><option>Blue</option></select>
+        </div>
+      </div>
+    </div>
+
+    <p class="delivery">Free Delivery</p>
+    <p class="total">Total : <span id="totalPrice">$18.00 USD</span></p>
+
+    <button class="cart-button">+ Add to Cart</button>
+    <footer>© Powered by Pumper</footer>
+  </div>
+
+  <script>
+    const boxes = document.querySelectorAll(\".box\");
+    const radios = document.querySelectorAll(\"input[name='unit']\");
+    const totalPriceEl = document.getElementById(\"totalPrice\");
+
+    const priceMap = {
+      1: 10.00,
+      2: 18.00,
+      3: 24.00
+    };
+
+    function collapseAll() {
+      boxes.forEach(box => {
+        box.classList.remove(\"expanded\");
+        box.style.border = \"1px solid #ddd\";
+        box.querySelector(\".dropdowns\").style.display = \"none\";
+      });
+    }
+
+    function updateTotal(value) {
+      const price = priceMap[value];
+      totalPriceEl.textContent = `$${price.toFixed(2)} USD`;
+    }
+
+    function expandBox(selectedValue) {
+      collapseAll();
+      const selectedBox = document.querySelector(`#box${selectedValue}`);
+      selectedBox.classList.add(\"expanded\");
+      selectedBox.querySelector(\".dropdowns\").style.display = \"block\";
+      document.querySelector(`input[name='unit'][value='${selectedValue}']`).checked = true;
+      updateTotal(selectedValue);
+    }
+
+    boxes.forEach(box => {
+      box.addEventListener(\"click\", () => {
+        const value = box.getAttribute(\"data-value\");
+        expandBox(value);
+      });
+    });
+
+    document.addEventListener(\"DOMContentLoaded\", () => {
+      const defaultSelected = document.querySelector(\"input[name='unit']:checked\");
+      if (defaultSelected) {
+        expandBox(defaultSelected.value);
+      }
+    });
+  </script>
+</body>
+</html>
