@@ -187,10 +187,10 @@
     <footer>© Powered by Pumper</footer>
   </div>
 
-  <script>
-    const boxes = document.querySelectorAll(\".box\");
-    const radios = document.querySelectorAll(\"input[name='unit']\");
-    const totalPriceEl = document.getElementById(\"totalPrice\");
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const boxes = document.querySelectorAll(".box");
+    const totalPriceEl = document.getElementById("totalPrice");
 
     const priceMap = {
       1: 10.00,
@@ -200,9 +200,8 @@
 
     function collapseAll() {
       boxes.forEach(box => {
-        box.classList.remove(\"expanded\");
-        box.style.border = \"1px solid #ddd\";
-        box.querySelector(\".dropdowns\").style.display = \"none\";
+        box.classList.remove("expanded");
+        box.querySelector(".dropdowns").style.display = "none";
       });
     }
 
@@ -214,25 +213,29 @@
     function expandBox(selectedValue) {
       collapseAll();
       const selectedBox = document.querySelector(`#box${selectedValue}`);
-      selectedBox.classList.add(\"expanded\");
-      selectedBox.querySelector(\".dropdowns\").style.display = \"block\";
+      selectedBox.classList.add("expanded");
+      const dropdowns = selectedBox.querySelector(".dropdowns");
+      if (dropdowns) {
+        dropdowns.style.display = "block";
+      }
       document.querySelector(`input[name='unit'][value='${selectedValue}']`).checked = true;
       updateTotal(selectedValue);
     }
 
     boxes.forEach(box => {
-      box.addEventListener(\"click\", () => {
-        const value = box.getAttribute(\"data-value\");
+      box.addEventListener("click", function () {
+        const value = this.getAttribute("data-value");
         expandBox(value);
       });
     });
 
-    document.addEventListener(\"DOMContentLoaded\", () => {
-      const defaultSelected = document.querySelector(\"input[name='unit']:checked\");
-      if (defaultSelected) {
-        expandBox(defaultSelected.value);
-      }
-    });
-  </script>
+    // Auto-expand default checked
+    const defaultSelected = document.querySelector("input[name='unit']:checked");
+    if (defaultSelected) {
+      expandBox(defaultSelected.value);
+    }
+  });
+</script>
+
 </body>
 </html>
