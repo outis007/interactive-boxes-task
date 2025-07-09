@@ -43,7 +43,7 @@ The goal was to replicate the interactive behavior shown in the provided Loom vi
 
 **Banu Prakash**  
 [LinkedIn Profile] *https://www.linkedin.com/in/banu-prakash-8176141a9*  
-[GitHub Profile] *(optional)*
+[GitHub Profile] *https://github.com/outis007https://github.com/outis007*
 
 ## 📝 License
 
